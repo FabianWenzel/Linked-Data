@@ -1,0 +1,16 @@
+#map {
+    height: 80%;
+    width: 80%;
+}
+
+.column-left {
+	padding-left: 5%;
+	padding-top: 2%
+	padding-bottom: 2%;
+}
+
+.column-right {
+	padding-right: 5%;
+	padding-top: 2%
+	padding-bottom: 2%;
+}

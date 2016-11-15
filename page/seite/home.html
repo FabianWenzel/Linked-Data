@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <title>Crime Map</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- <div class="container"> -->
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-lg-6 column-left">
+          <div id="map">
+      <!-- Raphaël JS Map Here -->
+          </div>
+        </div>
+        <div class="col-lg-6 column-right">
+          <h2 id="region-name"></h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <div id="d3js">
+          <script type="text/javascript">
+
+            //Just a test to load the json file into d3
+            d3.json("data/example.json", function(data) {
+            var result_values_subject = data.results.bindings[2].subject.value;
+            var result_values_object = data.results.bindings[0].object.value;
+            console.log(result_values_subject);
+            console.log(result_values_object);
+            });
+
+            
+
+
+
+          </script>
+            
+
+
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+        <div id="babynames">
+          <!-- BabyNames here -->
+        </div>
+        </div>
+      </div>
+      <hr>
+      <footer class="column-left">
+        <p>&copy; 2016 Crime Map</p>
+      </footer>
+    <!-- </div> --> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="raphael.min.js"></script>
+    <script src="map2.js"></script>
+  </body>
+</html>
