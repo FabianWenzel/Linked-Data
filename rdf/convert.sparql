@@ -1,0 +1,42 @@
+PREFIX bka: <http://127.0.0.1/data/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+	?crime_stat a bka:FN;
+		bka:Schluesse ?Schluesse;
+		bka:Straftat ?Straftat;
+		bka:Gemeindeschluessel ?Gemeindeschluessel;
+		bka:Stadt_Landkreis ?Stadt_Landkreis;
+		bka:Kreisart ?Kreisart;
+		bka:erfasste_Faelle ?erfasste_Faelle_int;
+		bka:HZ_nach_Zensus ?HZ_nach_Zensus_int;
+		bka:Versuche_Anzahl ?Versuche_Anzahl_int;
+		bka:Versuche_Anteil_in_Prozent ?Versuche_Anteil_in_Prozent_float;
+		bka:mit_Schusswaffe_gedroht ?mit_Schusswaffe_gedroht_int;
+		bka:mit_Schusswaffe_geschossen ?mit_Schusswaffe_geschossen_int;
+		bka:aufgeklaerte_Faelle ?aufgeklaerte_Faelle_int;
+		bka:Aufklaerungsquote ?Aufklaerungsquote_float;
+		bka:Tatverdaechtige_insgesamt ?Tatverdaechtige_insgesamt_int;
+		bka:Tatverdaechtige_maennlich ?Tatverdaechtige_maennlich_int;
+		bka:Tatverdaechtige_weiblich ?Tatverdaechtige_weiblich_int;
+		bka:Nichtdeutsche_Tatverdaechtige_Anzahl ?Nichtdeutsche_Tatverdaechtige_Anzahl_int;
+		bka:Tatverdaechtige_Anteil_in_Prozent ?Nichtdeutsche_Tatverdaechtige_Anteil_in_Prozent_float;
+}
+FROM <file:FaelleGrundtabelleKreise.csv#delimiter=%3B;encoding=latin1>
+WHERE {
+	BIND("http://127.0.0.1/data/" AS ?baseURI)
+	BIND(URI(CONCAT(?baseURI, "crime-stat/", ?Schluesse, "/", ?Gemeindeschluessel)) AS ?crime_stat)
+	BIND (xsd:integer(?erfasste_Faelle) AS ?erfasste_Faelle_int)
+	BIND (xsd:integer(?HZ_nach_Zensus) AS ?HZ_nach_Zensus_int)
+	BIND (xsd:integer(?Versuche_Anzahl) AS ?Versuche_Anzahl_int)
+	BIND (xsd:float(?Versuche_Anteil_in_Prozent) AS ?Versuche_Anteil_in_Prozent_float)
+	BIND (xsd:integer(?mit_Schusswaffe_gedroht) AS ?mit_Schusswaffe_gedroht_int)
+	BIND (xsd:integer(?mit_Schusswaffe_geschossen) AS ?mit_Schusswaffe_geschossen_int)
+	BIND (xsd:integer(?aufgeklaerte_Faelle) AS ?aufgeklaerte_Faelle_int)
+	BIND (xsd:float(?Aufklaerungsquote) AS ?Aufklaerungsquote_float)
+	BIND (xsd:integer(?Tatverdaechtige_insgesamt) AS ?Tatverdaechtige_insgesamt_int)
+	BIND (xsd:integer(?Tatverdaechtige_maennlich) AS ?Tatverdaechtige_maennlich_int)
+	BIND (xsd:integer(?Tatverdaechtige_weiblich) AS ?Tatverdaechtige_weiblich_int)
+	BIND (xsd:integer(?Nichtdeutsche_Tatverdaechtige_Anzahl) AS ?Nichtdeutsche_Tatverdaechtige_Anzahl_int)
+	BIND (xsd:float(?Nichtdeutsche_Tatverdaechtige_Anteil_in_Prozent) AS ?Nichtdeutsche_Tatverdaechtige_Anteil_in_Prozent_float)
+}
