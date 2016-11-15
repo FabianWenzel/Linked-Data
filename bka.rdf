@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<rdf:RDF
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:bka="http://127.0.0.1/data/">
+	
+  <rdf:Description rdf:about="FN">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:label>Formatted Name</rdfs:label>
+  </rdf:Description>
+	
+  <rdf:Description rdf:about="Schluesse">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:label>Schlüssel</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="Straftat">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:label>Straftat</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="Gemeindeschluessel">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:label>Gemeindeschlüssel</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="Stadt_Landkreis">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:label>Stadt-/Landkreis</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="Kreisart">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:label>Kreisart</rdfs:label>
+	<rdfs:range rdf:resource="#DISTTYPES"/>
+  </rdf:Description>
+  
+  <rdfs:Class rdf:about="DISTTYPES"/>
+   <bka:DISTTYPES rdf:about="KfS"/>
+   <bka:DISTTYPES rdf:about="K"/>
+   <bka:DISTTYPES rdf:about="LK"/>
+   <bka:DISTTYPES rdf:about="SK"/>
+   <bka:DISTTYPES rdf:about="RV"/>
+  
+  <rdf:Description rdf:about="erfasste_Faelle">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:label>erfasste Fälle</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="HZ_nach_Zensus">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:label>HZ nach Zensus</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="Versuche_Anzahl">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:label>Versuche - Anzahl</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="Versuche_Anteil_in_Prozent">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:label>Versuche - Anteil in %</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="mit_Schusswaffe_gedroht">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:label>mit Schusswaffe gedroht</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="mit_Schusswaffe_geschossen">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:label>mit Schusswaffe geschossen</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="aufgeklaerte_Faelle">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:label>aufgeklärte Faelle</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="Aufklaerungsquote">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:label>Aufklärungsquote</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="Tatverdaechtige_insgesamt">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:label>Tatverdächtige insgesamt</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="Tatverdaechtige_maennlich">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:label>Tatverdächtige - männlich</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="Tatverdaechtige_weiblich">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:label>Tatverdächtige - weiblich</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="Nichtdeutsche_Tatverdaechtige_Anzahl">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:label>Nichtdeutsche Tatverdächtige - Anzahl</rdfs:label>
+  </rdf:Description>
+  
+  <rdf:Description rdf:about="Nichtdeutsche Tatverdaechtige_Anteil_in_Prozent">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    <rdfs:label>Nichtdeutsche Tatverdächtige - Anteil in %</rdfs:label>
+  </rdf:Description>
+</rdf:RDF>
