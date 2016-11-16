@@ -287,6 +287,8 @@ for (var i = 0; i < regions.length; i++) {
    regions[i].mouseover(function(e){
 		this.node.style.opacity = 0.7;
 		var thisId = this.data('id').toString();
+		thisId = thisId.substring(0,10);
+
 		var thisIdCode = lookup[thisId];
 		
 		console.log(thisId);
