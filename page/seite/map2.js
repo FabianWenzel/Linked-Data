@@ -184,14 +184,19 @@ var Bodensee = rsr.path("M 784.947,1166.041 781.047,1162.193 778.705,1160.45 777
  CountryBorders.push( path_g , path_h ); 
  Rivers.push( path7031 , path3285_2_ );
 
-// Todo read external json
-var bkaData = [{"id":"kreis08111", "kreis":"Stuttgart"}, {"id":"kreis08115", "kreis":"Böblingen"}];
 
+ /*
+	Javascript Funktionalitäten
+ */
+var regionDetails = [];
+
+// ArrayId von regions ermitteln
 var lookup = {};
 for (var i = 0, len = regions.length; i < len; i++) {
     lookup[regions[i].data('id')] = i;
 }
 
+// Farben
 function getColorByHz(hz) {
 	var color;
 	if(hz > 10000) {
@@ -220,27 +225,13 @@ function getColorByHz(hz) {
 	return color;
 }
 
-function getRegionById(id) {
-	return bkaData.filter(
-		function(bkaData) {
-			return bkaData.id == id
-		}
-	);
-}
-
  // Iterate through the regions 
 for (var i = 0; i < regions.length; i++) {
 
-	console.log("iteration: " + i);
-	console.log(regions[i].data('id'));
-
-
     var regionFull = regions[i].data('id');
     var regionId = regionFull.substring(6);
-    // console.log("region id: " + regionId);
 
     var queryString = "http://localhost:3030/bka/?query=PREFIX%20bka:%20%3Chttp://purl.org/net/hdm-bka%3E%20SELECT%20?hz%20?sl%20?ka%20?gs%20WHERE%20{?x%20bka:HZ_nach_Zensus%20?hz%20.%20?x%20bka:Stadt_Landkreis%20?sl%20.%20?x%20bka:Kreisart%20?ka%20.%20?x%20bka:Straftat%20%22Straftaten%20insgesamt%22%20.%20?x%20bka:Gemeindeschluessel%20%22" + regionId + "%22%20.%20?x%20bka:Gemeindeschluessel%20?gs}&output=JSON";
-    //console.log(queryString);
 
     var hz;
     var sl;
@@ -249,7 +240,7 @@ for (var i = 0; i < regions.length; i++) {
  
 
     $.getJSON(queryString, function(data) {
-	console.log("success");
+	// console.log("success");
 	var items = [];
 	$.each(data.results, function(key, val) {
 		$.each(val, function(m, n) {
@@ -275,14 +266,16 @@ for (var i = 0; i < regions.length; i++) {
 				}
 			})
 
-			console.log("lookup: " + lookup[gs]);
 			var hzColor = getColorByHz(hz);
 			var regionId = lookup[gs];
 			var regionId2 = lookup[gs + "_2"];
 
+			// Regionen einfärben
 			regions[regionId].node.setAttribute('fill', hzColor);
+			// Ergebnisse in Array speichern
+			regionDetails[regionId] = ({hzt: hz, gst: gs, slt: sl, kat: ka});
 			regions[regionId2].node.setAttribute('fill', hzColor);
-			console.log(gs + " " + hz + " " + sl + " " + ka + " " + hzColor);
+			
 		})
 		
 	});
@@ -290,15 +283,27 @@ for (var i = 0; i < regions.length; i++) {
 
 
 
-    // Showing off
+   // Mouseover Funktionalitäten
    regions[i].mouseover(function(e){
 		this.node.style.opacity = 0.7;
 		var thisId = this.data('id').toString();
+		var thisIdCode = lookup[thisId];
+		
 		console.log(thisId);
-		// document.getElementById('region-name').innerHTML = this.data('id');
-		var found = getRegionById(thisId);
-		console.log(found);
-		document.getElementById('region-name').innerHTML = found[0].kreis;
+		console.log(thisIdCode);
+		console.log("SLT:" + regionDetails[thisIdCode].slt);
+		console.log("KAT:" + regionDetails[thisIdCode].kat);
+
+		var kreisTyp;
+
+		if(regionDetails[thisIdCode].kat === "LK") {
+			kreisTyp = "Landkreis";
+		} else {
+			kreisTyp = "Stadtkreis";
+		}
+		
+		document.getElementById('region-name').innerHTML = regionDetails[thisIdCode].slt;
+		document.getElementById('region-type').innerHTML = kreisTyp;
 	});
 
 	regions[i].mouseout(function(e){

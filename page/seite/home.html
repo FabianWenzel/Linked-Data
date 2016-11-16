@@ -20,6 +20,46 @@
 
   <body>
 
+<nav class="navbar navbar-default navbar-fixed-top custom-nav">
+      
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Crime Map BW</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Straftaten <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Gesamt</a></li>
+                <li><a href="#">Mord</a></li>
+                <li><a href="#">Vergewaltigung</a></li>
+                <li><a href="#">Andere</a>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="../navbar/">Default</a></li>
+            <li><a href="../navbar-static-top/">Static top</a></li>
+            <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+   
+    </nav>
+
+    <div class="row headline">
+      <h1>Straftaten gesamt pro 100.000 Einwohner</h1>
+    </div>
+
+
     <!-- <div class="container"> -->
       <!-- Example row of columns -->
       <div class="row">
@@ -30,6 +70,7 @@
         </div>
         <div class="col-lg-6 column-right">
           <h2 id="region-name"></h2>
+          <h3 id="region-type"></h3>
           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
           <div id="chart">
           <script>
@@ -123,7 +164,7 @@ arcs.append("svg:text").attr("transform", function(d){
       </div>
       <hr>
       <footer class="column-left">
-        <p>&copy; 2016 Crime Map</p>
+        <p>&copy; 2016 Crime Map BW</p>
       </footer>
     <!-- </div> --> <!-- /container -->
 
