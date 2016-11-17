@@ -190,6 +190,12 @@ var Bodensee = rsr.path("M 784.947,1166.041 781.047,1162.193 778.705,1160.45 777
  */
 var regionDetails = [];
 
+var hz;
+var sl;
+var ka;
+var gs;
+var ef;
+
 // ArrayId von regions ermitteln
 var lookup = {};
 for (var i = 0, len = regions.length; i < len; i++) {
@@ -225,21 +231,11 @@ function getColorByHz(hz) {
 	return color;
 }
 
- // Iterate through the regions 
-for (var i = 0; i < regions.length; i++) {
+function getData(regionId, crimeType) {
 
-    var regionFull = regions[i].data('id');
-    var regionId = regionFull.substring(6);
+	var queryString = "http://localhost:3030/bka/?query=PREFIX%20bka:%20%3Chttp://purl.org/net/hdm-bka%3E%20SELECT%20?hz%20?sl%20?ka%20?gs%20?ef%20WHERE%20{?x%20bka:HZ_nach_Zensus%20?hz%20.%20?x%20bka:Stadt_Landkreis%20?sl%20.%20?x%20bka:Kreisart%20?ka%20.%20?x%20bka:Straftat%20%22" + crimeType +"%22%20.%20?x%20bka:Gemeindeschluessel%20%22" + regionId + "%22%20.%20?x%20bka:Gemeindeschluessel%20?gs%20.%20?x%20bka:erfasste_Faelle%20?ef}&output=JSON";
 
-    var queryString = "http://localhost:3030/bka/?query=PREFIX%20bka:%20%3Chttp://purl.org/net/hdm-bka%3E%20SELECT%20?hz%20?sl%20?ka%20?gs%20WHERE%20{?x%20bka:HZ_nach_Zensus%20?hz%20.%20?x%20bka:Stadt_Landkreis%20?sl%20.%20?x%20bka:Kreisart%20?ka%20.%20?x%20bka:Straftat%20%22Straftaten%20insgesamt%22%20.%20?x%20bka:Gemeindeschluessel%20%22" + regionId + "%22%20.%20?x%20bka:Gemeindeschluessel%20?gs}&output=JSON";
-
-    var hz;
-    var sl;
-    var ka;
-    var gs;
- 
-
-    $.getJSON(queryString, function(data) {
+	$.getJSON(queryString, function(data) {
 	// console.log("success");
 	var items = [];
 	$.each(data.results, function(key, val) {
@@ -265,26 +261,38 @@ for (var i = 0; i < regions.length; i++) {
 					ka = kaval;
 				}
 			})
+			$.each(n.ef, function(efkey, efval) {
+				if(efkey.localeCompare('value') == 0) {
+					ef = efval;
+				}
+			})
 
-			var hzColor = getColorByHz(hz);
+			var hzColor;
+			if (crimeType.localeCompare('Mord und Totschlag') == 0) {
+				hzColor = getColorByHz(hz*1200);
+			} else if (crimeType.localeCompare('Vergewaltigung und sexuelle Nötigung §§ 177 Abs. 2, 3 und 4, 178 StGB') == 0) {
+				hzColor = getColorByHz(hz*500);
+			} else {
+				hzColor = getColorByHz(hz);
+			}
 			var regionId = lookup[gs];
 			var regionId2 = lookup[gs + "_2"];
+			var einwohner = Math.round(100000/hz*ef);
 
 			// Regionen einfärben
 			regions[regionId].node.setAttribute('fill', hzColor);
 			// Ergebnisse in Array speichern
-			regionDetails[regionId] = ({hzt: hz, gst: gs, slt: sl, kat: ka});
+			regionDetails[regionId] = ({hzt: hz, gst: gs, slt: sl, kat: ka, eft: ef, einwohner: einwohner});
 			regions[regionId2].node.setAttribute('fill', hzColor);
 			
-		})
+			})
 		
+		});
 	});
-	});
+}
 
-
-
-   // Mouseover Funktionalitäten
-   regions[i].mouseover(function(e){
+function showStuff(counter) {
+		regions[counter].mouseover(function(e){
 		this.node.style.opacity = 0.7;
 		var thisId = this.data('id').toString();
 		thisId = thisId.substring(0,10);
@@ -306,9 +314,54 @@ for (var i = 0; i < regions.length; i++) {
 		
 		document.getElementById('region-name').innerHTML = regionDetails[thisIdCode].slt;
 		document.getElementById('region-type').innerHTML = kreisTyp;
+		document.getElementById('straftaten-prozent').innerHTML = regionDetails[thisIdCode].hzt;
+		
+		document.getElementById('straftaten').innerHTML = regionDetails[thisIdCode].eft;
+		// document.getElementById('einwohner').innerHTML = regionDetails[thisIdCode].einwohner;	
 	});
 
-	regions[i].mouseout(function(e){
+	regions[counter].mouseout(function(e){
 		this.node.style.opacity = 1;
-	});
+	});	
+}
+
+// Load stats for murder
+$('#mord').click(function() {		
+	crimeType = "Mord und Totschlag";
+	document.getElementById('header-crime').innerHTML = crimeType;
+	console.log("CRIME-TYPE: " + crimeType);
+	for (var i = 0; i < regions.length; i++) {
+		var regionFull = regions[i].data('id');
+    	var regionId = regionFull.substring(6);
+    
+    	getData(regionId, crimeType);
+    	showStuff(i);
+	}
+})
+
+// Load stats for rape
+$('#vergewaltigung').click(function() {		
+	crimeType = "Vergewaltigung und sexuelle Nötigung §§ 177 Abs. 2, 3 und 4, 178 StGB";
+	document.getElementById('header-crime').innerHTML = crimeType;
+	console.log("CRIME-TYPE: " + crimeType);
+	for (var i = 0; i < regions.length; i++) {
+		var regionFull = regions[i].data('id');
+    	var regionId = regionFull.substring(6);
+    	
+    	getData(regionId, crimeType);
+    	showStuff(i);
+	}
+})
+
+
+ // Initial loadup of all crimes
+for (var i = 0; i < regions.length; i++) {
+
+	var regionFull = regions[i].data('id');
+	var regionId = regionFull.substring(6);
+
+	crimeType = 'Straftaten insgesamt';
+	document.getElementById('header-crime').innerHTML = crimeType;
+    getData(regionId, crimeType);
+    showStuff(i);
 }
