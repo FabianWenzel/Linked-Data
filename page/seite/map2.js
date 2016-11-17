@@ -231,12 +231,13 @@ for (var i = 0; i < regions.length; i++) {
     var regionFull = regions[i].data('id');
     var regionId = regionFull.substring(6);
 
-    var queryString = "http://localhost:3030/bka/?query=PREFIX%20bka:%20%3Chttp://purl.org/net/hdm-bka%3E%20SELECT%20?hz%20?sl%20?ka%20?gs%20WHERE%20{?x%20bka:HZ_nach_Zensus%20?hz%20.%20?x%20bka:Stadt_Landkreis%20?sl%20.%20?x%20bka:Kreisart%20?ka%20.%20?x%20bka:Straftat%20%22Straftaten%20insgesamt%22%20.%20?x%20bka:Gemeindeschluessel%20%22" + regionId + "%22%20.%20?x%20bka:Gemeindeschluessel%20?gs}&output=JSON";
+    var queryString = "http://localhost:3030/bka/?query=PREFIX%20bka:%20%3Chttp://purl.org/net/hdm-bka%3E%20SELECT%20?hz%20?sl%20?ka%20?gs%20?ef%20WHERE%20{?x%20bka:HZ_nach_Zensus%20?hz%20.%20?x%20bka:Stadt_Landkreis%20?sl%20.%20?x%20bka:Kreisart%20?ka%20.%20?x%20bka:Straftat%20%22Straftaten%20insgesamt%22%20.%20?x%20bka:Gemeindeschluessel%20%22" + regionId + "%22%20.%20?x%20bka:Gemeindeschluessel%20?gs%20.%20?x%20bka:erfasste_Faelle%20?ef}&output=JSON";
 
     var hz;
     var sl;
     var ka;
     var gs;
+    var ef;
  
 
     $.getJSON(queryString, function(data) {
@@ -265,15 +266,21 @@ for (var i = 0; i < regions.length; i++) {
 					ka = kaval;
 				}
 			})
+			$.each(n.ef, function(efkey, efval) {
+				if(efkey.localeCompare('value') == 0) {
+					ef = efval;
+				}
+			})
 
 			var hzColor = getColorByHz(hz);
 			var regionId = lookup[gs];
 			var regionId2 = lookup[gs + "_2"];
+			var einwohner = Math.round(100000/hz*ef);
 
 			// Regionen einfärben
 			regions[regionId].node.setAttribute('fill', hzColor);
 			// Ergebnisse in Array speichern
-			regionDetails[regionId] = ({hzt: hz, gst: gs, slt: sl, kat: ka});
+			regionDetails[regionId] = ({hzt: hz, gst: gs, slt: sl, kat: ka, eft: ef, einwohner: einwohner});
 			regions[regionId2].node.setAttribute('fill', hzColor);
 			
 		})
@@ -306,6 +313,9 @@ for (var i = 0; i < regions.length; i++) {
 		
 		document.getElementById('region-name').innerHTML = regionDetails[thisIdCode].slt;
 		document.getElementById('region-type').innerHTML = kreisTyp;
+		document.getElementById('straftaten-prozent').innerHTML = regionDetails[thisIdCode].hzt;
+		document.getElementById('straftaten').innerHTML = regionDetails[thisIdCode].eft;
+		document.getElementById('einwohner').innerHTML = regionDetails[thisIdCode].einwohner;
 	});
 
 	regions[i].mouseout(function(e){
