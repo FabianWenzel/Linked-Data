@@ -39,9 +39,9 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Straftaten <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Gesamt</a></li>
-                <li><a href="#">Mord</a></li>
-                <li><a href="#">Vergewaltigung</a></li>
+                <li><a href="">Gesamt</a></li>
+                <li><a id="mord" href="#">Mord</a></li>
+                <li><a id="vergewaltigung" href="#">Vergewaltigung</a></li>
                 <li><a href="#">Andere</a>
               </ul>
             </li>
@@ -56,7 +56,7 @@
     </nav>
 
     <div class="row headline">
-      <h1>Straftaten gesamt pro 100.000 Einwohner</h1>
+      <h1 id="header-crime"></h1>
     </div>
 
 
@@ -71,9 +71,8 @@
         <div class="col-lg-6 column-right">
           <h2 id="region-name"></h2>
           <h3 id="region-type"></h3>
-          <p>Einwohner:                          <span id="einwohner"></span></p>
-          <p>Straftaten gesamt:                  <span id="straftaten"></span></p>
-          <p>Straftaten pro 100.000 Einwohner:   <span id="straftaten-prozent"></span></p>
+          <p><!-- Einwohner:                          <span id="einwohner"></span>--> Straftaten gesamt: <span id="straftaten"></span></p> 
+          <p><span id="straftaten-typ"></span> pro 100.000 Einwohner:   <span id="straftaten-prozent"></span></p>
           <div id="chart">
           <script>
 
