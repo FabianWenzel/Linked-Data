@@ -272,6 +272,12 @@ function getData(regionId, crimeType) {
 				hzColor = getColorByHz(hz*1200);
 			} else if (crimeType.localeCompare('Vergewaltigung und sexuelle Nötigung §§ 177 Abs. 2, 3 und 4, 178 StGB') == 0) {
 				hzColor = getColorByHz(hz*500);
+			} else if (crimeType.localeCompare('Gewaltkriminalität') == 0) {
+				hzColor = getColorByHz(hz*25);
+			} else if (crimeType.localeCompare('Straßenkriminalität') == 0) {
+				hzColor = getColorByHz(hz*5);
+			} else if (crimeType.localeCompare('Diebstahl insgesamt und zwar:') == 0) {
+				hzColor = getColorByHz(hz*2);
 			} else {
 				hzColor = getColorByHz(hz);
 			}
@@ -342,7 +348,50 @@ $('#mord').click(function() {
 // Load stats for rape
 $('#vergewaltigung').click(function() {		
 	crimeType = "Vergewaltigung und sexuelle Nötigung §§ 177 Abs. 2, 3 und 4, 178 StGB";
+	document.getElementById('header-crime').innerHTML = "Vergewaltigung und sexuelle Nötigung";
+	console.log("CRIME-TYPE: " + crimeType);
+	for (var i = 0; i < regions.length; i++) {
+		var regionFull = regions[i].data('id');
+    	var regionId = regionFull.substring(6);
+    	
+    	getData(regionId, crimeType);
+    	showStuff(i);
+	}
+})
+
+// Load stats for violent crime
+$('#gewaltkriminalität').click(function() {		
+	crimeType = "Gewaltkriminalität";
 	document.getElementById('header-crime').innerHTML = crimeType;
+	console.log("CRIME-TYPE: " + crimeType);
+	for (var i = 0; i < regions.length; i++) {
+		var regionFull = regions[i].data('id');
+    	var regionId = regionFull.substring(6);
+    	
+    	getData(regionId, crimeType);
+    	showStuff(i);
+	}
+})
+
+// Load stats for street crime
+$('#straßenkriminalität').click(function() {
+	console.log("straßenkriminalität");		
+	crimeType = "Straßenkriminalität";
+	document.getElementById('header-crime').innerHTML = crimeType;
+	console.log("CRIME-TYPE: " + crimeType);
+	for (var i = 0; i < regions.length; i++) {
+		var regionFull = regions[i].data('id');
+    	var regionId = regionFull.substring(6);
+    	
+    	getData(regionId, crimeType);
+    	showStuff(i);
+	}
+})
+
+// Load stats for theft
+$('#diebstahl-insgesamt').click(function() {		
+	crimeType = "Diebstahl insgesamt und zwar:";
+	document.getElementById('header-crime').innerHTML = "Diebstahl insgesamt";
 	console.log("CRIME-TYPE: " + crimeType);
 	for (var i = 0; i < regions.length; i++) {
 		var regionFull = regions[i].data('id');
