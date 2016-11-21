@@ -1,0 +1,105 @@
+Raub 
+	1) Raubüberfälle in der Wohnung
+	2) Sonstige Raubüberfälle auf Straßen, Wegen oder Plätzen
+	3) Handtaschenraub
+	4) Raub, räuberische Erpressung auf/gegen sonstige Zahlstellen und Geschäfte
+	5) Raub, räuberische Erpressung auf/gegen Geldinstitute, Postfilialen und -agenturen
+	6) Raub, räuberische Erpressung und räuberischer Angriff auf Kraftfahrer §§ 249-252, 255, 316a StGB
+
+Körperverletzung
+	1) Gefährliche und schwere Körperverletzung, Verstümmelung weiblicher Genitalien §§ 224, 226, 226a, 231 StGB
+	2) Vorsätzliche einfache Körperverletzung § 223 StGB
+
+Diebstahl
+	1) Diebstahl ohne erschwerende Umstände §§ 242, 247, 248a-c StGB und zwar:
+	2) Einfacher Ladendiebstahl
+	3) Diebstahl unter erschwerenden Umständen §§ 243-244a StGB und zwar:
+	4) Taschendiebstahl insgesamt
+	5) Diebstahl insgesamt und zwar:
+			von, an und aus Kfz
+			Ladendiebstahl
+			Fahrraddiebstahl
+			Diebstahl insgesamt in/aus Wohnungen
+			Taschendiebstahl
+			sonstiger Diebstahl 
+
+Einbruch
+	1) Wohnungseinbruchdiebstahl § 244 Abs. 1 Nr. 3 StGB darunter: 
+	2) Tageswohnungseinbruch
+
+Autodiebstahl
+	1) Diebstahl insgesamt von Kraftwagen einschl. unbefugte Ingebrauchnahme
+	2) Diebstahl insgesamt von Mopeds und Krafträdern einschl. unbefugte Ingebrauchnahme
+	3) Diebstahl insgesamt an/aus Kraftfahrzeugen
+
+
+Fahrraddiebstahl
+	1) Diebstahl insgesamt von Fahrrädern einschl. unbefugte Ingebrauchnahme
+
+Betrug
+	1) Betrug §§ 263, 263a, 264, 264a, 265, 265a, 265b StGB
+	2) Erschleichen von Leistungen § 265a StGB
+	3) Beförderungserschleichung
+	4) Unterschlagung §§ 246, 247, 248a StGB
+	5) Urkundenfälschung §§ 267-271, 273-279, 281 StGB
+
+Widerstand
+	1) Widerstand gegen Vollstreckungsbeamte
+	2) Widerstand gegen Polizeivollzugsbeamte
+
+Begünstigung
+	1) Begünstigung, Strafvereitelung (ohne Strafvereitelung im Amt), Hehlerei und Geldwäsche §§ 257, 258, 259-261 StGB
+
+Brandstiftung
+	1) Brandstiftung und Herbeiführen einer Brandgefahr §§ 306-306d, 306f StGB
+
+Sachbeschädigung
+	1) Sachbeschädigung §§ 303-305a StGB
+	2) Sachbeschädigung durch Graffiti insgesamt
+
+Asyl
+	1) Straftaten gegen das Aufenthalts-, das Asylverfahrens- und das Freizügigkeitsgesetz/EU
+	2) Unerlaubt eingereiste/aufhältige Personen (SZ: 725100, 725700)
+
+Drogen
+	1) Rauschgiftdelikte (soweit nicht bereits mit anderer Schlüsselzahl erfasst)
+
+Gewaltkriminalität [Was beinhaltet das?]
+	Mord und Totschlag 2.179 2.122 57 2,7 96,5 95,8
+	Vergewaltigung und sexuelle Nötigung 7.345 7.408 -63 -0,9 81,0 82,0
+	Raubdelikte 45.475 47.234 -1.759 -3,7 51,6 51,7
+	**) gefährliche und schwere Körperverletzung, Verstümmelung
+	weiblicher Organe 125.752 127.869 -2.117 -1,7 82,4 82,1
+
+Mord und Totschlag
+
+Computerkriminalität
+
+Straßenkriminalität [Was beinhaltet das?]
+	216000 Handtaschenraub 2.599 7,0 23,2 26,2 43,5
+	217000 Sonstige Raubüberfälle auf Straßen, Wegen oder Plätzen 20.447 7,8 20,4 26,5 45,2
+	222100 Gefährliche und schwere Körperverletzung auf Straßen, Wegen oder Plätzen 57.594 17,9 25,7 24,8 31,5
+	*50*00 Diebstahl insgesamt an/aus Kraftfahrzeugen 332.773 21,8 24,8 19,5 33,7
+	*90*00 Taschendiebstahl 157.069 5,0 12,1 20,9 61,7
+	623000 Landfriedensbruch 1.785 4,1 6,0 30,7 59,0
+	674100 Sachbeschädigung an Kfz 224.716 24,9 29,9 22,4 22,4
+	674300 Sonstige Sachbeschädigung auf Straßen, Wegen oder Plätzen 157.305 28,1 29,7 21,4 20,0
+
+IuK-Kriminalität im engeren Sinne (SZ: 517500, 517900, 543000, 674200, 678000) 
+	Teilmenge von Computerkriminalität
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
