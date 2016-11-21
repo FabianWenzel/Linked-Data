@@ -298,6 +298,10 @@ function getData(regionId, crimeType) {
 }
 
 function showStuff(counter) {
+		$('#map').show();
+		$('#info').show();
+		$('#about-content').hide();
+
 		regions[counter].mouseover(function(e){
 		this.node.style.opacity = 0.7;
 		var thisId = this.data('id').toString();
@@ -400,6 +404,15 @@ $('#diebstahl-insgesamt').click(function() {
     	getData(regionId, crimeType);
     	showStuff(i);
 	}
+})
+
+// Load Sources page
+$('#quellen').click(function() {		
+	$('#about-content').show();
+	document.getElementById('header-crime').innerHTML = "Quellen";
+	$('#map').hide();
+	$('#info').hide();
+	$('#about-content').load('http://localhost:8000/sources.html'); 
 })
 
 
