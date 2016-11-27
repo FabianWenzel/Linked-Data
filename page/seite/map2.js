@@ -915,7 +915,7 @@ $('#quellen').click(function () {
     document.getElementById('header-crime').innerHTML = "Quellen";
     $('#map').hide();
     $('#info').hide();
-    $('#about-content').load('http://localhost:8000/sources.html');
+    $('#about-content').load('sources.html');
 })
 
 
