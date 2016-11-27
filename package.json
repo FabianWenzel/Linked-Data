@@ -1,0 +1,34 @@
+{
+  "name": "crime-map",
+  "version": "0.1.0",
+  "description": "A visualization of criminal statistics in the German state Baden-Württemberg.",
+  "main": "webserver.js",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FabianWenzel/Linked-Data.git"
+  },
+  "keywords": [
+    "linked data",
+    "open data",
+    "crime",
+    "bka",
+    "baden-württemberg"
+  ],
+  "author": "Fabian Wenzel <fw031@hdm-stuttgart.de>",
+  "contributors": [
+    "Jerome Badt <jb163@hdm-stuttgart.de>",
+    "Joshua Hill <jh147@hdm-stuttgart.de>"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FabianWenzel/Linked-Data/issues"
+  },
+  "homepage": "https://github.com/FabianWenzel/Linked-Data#readme"
+}
