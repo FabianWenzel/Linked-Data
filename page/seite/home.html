@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,171 +15,163 @@
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
+</head>
 
-  </head>
-
-  <body>
-
+<body>
 <nav class="navbar navbar-default navbar-fixed-top custom-nav">
-      
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" a href="">Crime Map BW</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
+        </button>
+        <a class="navbar-brand" a href="">Crime Map BW</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
             <li><a href="">Home</a></li>
-            
+
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Straftaten <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="">Gesamt</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a id="gewaltkriminalität" href="#">Gewaltkriminalität</a></li>
-                <li><a id="mord" href="#">Mord</a></li>
-                <li><a id="vergewaltigung" href="#">Vergewaltigung</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a id="straßenkriminalität" href="#">Straßenkriminalität</a></li>
-                <li><a id="diebstahl-insgesamt" href="#">Diebstahl insgesamt</a></li>
-              </ul>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false">Straftaten <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="">Gesamt</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a id="gewaltkriminalität" href="#">Gewaltkriminalität</a></li>
+                    <li><a id="mord" href="#">Mord</a></li>
+                    <li><a id="vergewaltigung" href="#">Vergewaltigung</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a id="straßenkriminalität" href="#">Straßenkriminalität</a></li>
+                    <li><a id="diebstahl-insgesamt" href="#">Diebstahl insgesamt</a></li>
+                </ul>
             </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
             <li><a id="quellen" href="#">Quellen</a></li>
             <li><a id="impressum" href="#">Impressum</a></li>
             <!-- <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li> -->
-          </ul>
-        </div><!--/.nav-collapse -->
-   
-    </nav>
+        </ul>
+    </div><!--/.nav-collapse -->
+</nav>
 
-    <div class="row headline">
-      <h1 id="header-crime"></h1>
-    </div>
+<div class="row headline">
+    <h1 id="header-crime"></h1>
+</div>
 
-
-    <!-- <div class="container"> -->
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-lg-6 column-left">
-          <div id="map">
-      <!-- Raphaël JS Map Here -->
-          </div>
+<!-- <div class="container"> -->
+<!-- Example row of columns -->
+<div class="row">
+    <div class="col-lg-6 column-left">
+        <div id="map">
+            <!-- Raphaël JS Map Here -->
         </div>
-        <div class="col-lg-6 column-right" id="info">
-          <h2 id="region-name"></h2>
-          <h3 id="region-type"></h3>
-          <p><!-- Einwohner:                          <span id="einwohner"></span>--> Straftaten gesamt: <span id="straftaten"></span></p> 
-          <p><span id="straftaten-typ"></span> pro 100.000 Einwohner:   <span id="straftaten-prozent"></span></p>
-          <div id="chart">
-          <script>
+    </div>
+    <div class="col-lg-6 column-right" id="info">
+        <h2 id="region-name"></h2>
+        <h3 id="region-type"></h3>
+        <p><!-- Einwohner:                          <span id="einwohner"></span>--> Straftaten gesamt: <span
+                id="straftaten"></span></p>
+        <p><span id="straftaten-typ"></span> pro 100.000 Einwohner: <span id="straftaten-prozent"></span></p>
+        <div id="chart">
+            <script>
 
-            //Just a test to load the json file into d3
-            d3.json("data/example.json", function(data) {
-            var result_values_subject = data.results.bindings[2].subject.value;
-            var result_values_object = data.results.bindings[0].object.value;
-            console.log(result_values_subject);
-            console.log(result_values_object);
-           
-           var newdata = data;
+                //Just a test to load the json file into d3
+                d3.json("data/example.json", function (data) {
+                    var result_values_subject = data.results.bindings[2].subject.value;
+                    var result_values_object = data.results.bindings[0].object.value;
+                    console.log(result_values_subject);
+                    console.log(result_values_object);
 
-
-            var w = 400;
-var h = 400;
-var r = h/2;
-var color = d3.scale.category20c();
-
-var quelle = {
-item_quelle: []
-};
-
-for(var i in data.results.bindings) {
-quelle.item_quelle.push({
-"subject" : data.results.bindings[i].subject.value,
-"object"  : data.results.bindings[i].object.value
-});
-    }
-    
-    
-console.log(quelle);
+                    var newdata = data;
 
 
-var data = [{"label":"Category A", "value":20}, 
-              {"label":"Category B", "value":50}, 
-              {"label":"Category C", "value":30}];
+                    var w = 400;
+                    var h = 400;
+                    var r = h / 2;
+                    var color = d3.scale.category20c();
 
-              
+                    var quelle = {
+                        item_quelle: []
+                    };
+
+                    for (var i in data.results.bindings) {
+                        quelle.item_quelle.push({
+                            "subject": data.results.bindings[i].subject.value,
+                            "object": data.results.bindings[i].object.value
+                        });
+                    }
 
 
-var vis = d3.select('#chart').append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
-var pie = d3.layout.pie().value(function(d){return d.value;});
+                    console.log(quelle);
+
+
+                    var data = [{"label": "Category A", "value": 20},
+                        {"label": "Category B", "value": 50},
+                        {"label": "Category C", "value": 30}];
+
+
+                    var vis = d3.select('#chart').append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
+                    var pie = d3.layout.pie().value(function (d) {
+                        return d.value;
+                    });
 
 // declare an arc generator function
-var arc = d3.svg.arc().outerRadius(r);
+                    var arc = d3.svg.arc().outerRadius(r);
 
 // select paths, use arc generator to draw
-var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
-arcs.append("svg:path")
-    .attr("fill", function(d, i){
-        return color(i);
-    })
-    .attr("d", function (d) {
-        // log the result of the arc generator to show how cool it is :)
-        console.log(arc(d));
-        return arc(d);
-    });
+                    var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
+                    arcs.append("svg:path")
+                        .attr("fill", function (d, i) {
+                            return color(i);
+                        })
+                        .attr("d", function (d) {
+                            // log the result of the arc generator to show how cool it is :)
+                            console.log(arc(d));
+                            return arc(d);
+                        });
 
 // add the text
-arcs.append("svg:text").attr("transform", function(d){
-      d.innerRadius = 0;
-      d.outerRadius = r;
-     return "translate(" + arc.centroid(d) + ")";}).attr("text-anchor", "middle").text( function(d, i) {
-    return data[i].label;}
-    );
+                    arcs.append("svg:text").attr("transform", function (d) {
+                        d.innerRadius = 0;
+                        d.outerRadius = r;
+                        return "translate(" + arc.centroid(d) + ")";
+                    }).attr("text-anchor", "middle").text(function (d, i) {
+                            return data[i].label;
+                        }
+                    );
 
 
-            
- });
-            
+                });
 
 
-
-          </script>
-            
-
-
-          </div>
-
-
+            </script>
         </div>
-      </div>
+    </div>
+</div>
 
-      <div class="row">
-        <div class="col-lg-12">
+<div class="row">
+    <div class="col-lg-12">
         <div id="about-content">
-          <!-- About content here -->
+            <!-- About content here -->
         </div>
-        </div>
-      </div>
-      <hr>
-      <footer class="column-left">
-        <p>&copy; 2016 Crime Map BW</p>
-      </footer>
-    <!-- </div> --> <!-- /container -->
+    </div>
+</div>
+<hr>
+<footer class="column-left">
+    <p>&copy; 2016 Crime Map BW</p>
+</footer>
+<!-- </div> --> <!-- /container -->
 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="raphael.min.js"></script>
-    <script src="map2.js"></script>
-  </body>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="js/bootstrap.min.js"></script>
+<script src="raphael.min.js"></script>
+<script src="map2.js"></script>
+</body>
 </html>
