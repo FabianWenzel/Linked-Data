@@ -4,7 +4,8 @@
   "description": "A visualization of criminal statistics in the German state Baden-Württemberg.",
   "main": "webserver.js",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "raphael": "^2.2.7"
   },
   "devDependencies": {},
   "scripts": {
