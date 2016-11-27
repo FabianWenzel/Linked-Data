@@ -9,7 +9,6 @@ const h = 1160;
 const raphael = require('raphael');
 const rsr = raphael("map");
 
-// var rsr = Raphael("map");
 rsr.setViewBox(0, 0, w, h);
 rsr.canvas.setAttribute('preserveAspectRatio', 'none');
 
@@ -921,7 +920,7 @@ $('#quellen').click(function () {
     document.getElementById('header-crime').innerHTML = "Quellen";
     $('#map').hide();
     $('#info').hide();
-    $('#about-content').load('http://localhost:8000/sources.html');
+    $('#about-content').load('sources.html');
 })
 
 
