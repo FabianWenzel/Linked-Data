@@ -792,10 +792,10 @@ function getData(regionId, crimeType) {
                 regions[regionId].node.setAttribute('fill', hzColor);
                 // Ergebnisse in Array speichern
                 regionDetails[regionId] = ({hzt: hz, gst: gs, slt: sl, kat: ka, eft: ef, einwohner: einwohner});
-                regions[regionId2].node.setAttribute('fill', hzColor);
-
+                if (regionId2 !== undefined) {
+                    regions[regionId2].node.setAttribute('fill', hzColor);
+                }
             })
-
         });
     });
 }
