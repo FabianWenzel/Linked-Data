@@ -14,7 +14,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="styles.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
 </head>
 
 <body>
@@ -86,7 +86,6 @@
 
                     var newdata = data;
 
-
                     var w = 400;
                     var h = 400;
                     var r = h / 2;
@@ -103,9 +102,7 @@
                         });
                     }
 
-
                     console.log(quelle);
-
 
                     var data = [{"label": "Category A", "value": 20},
                         {"label": "Category B", "value": 50},
@@ -117,10 +114,10 @@
                         return d.value;
                     });
 
-// declare an arc generator function
+                    // declare an arc generator function
                     var arc = d3.svg.arc().outerRadius(r);
 
-// select paths, use arc generator to draw
+                    // select paths, use arc generator to draw
                     var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
                     arcs.append("svg:path")
                         .attr("fill", function (d, i) {
@@ -132,7 +129,7 @@
                             return arc(d);
                         });
 
-// add the text
+                    // add the text
                     arcs.append("svg:text").attr("transform", function (d) {
                         d.innerRadius = 0;
                         d.outerRadius = r;
@@ -141,8 +138,6 @@
                             return data[i].label;
                         }
                     );
-
-
                 });
 
 

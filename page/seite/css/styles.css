@@ -5,26 +5,20 @@
 
 .column-left {
     padding-left: 5%;
-    padding-top: 2%
+    padding-top: 2%;
     padding-bottom: 2%;
 }
 
 .column-right {
-    padding-right: 5%;
-    padding-left: 5%;
-    padding-top: 2%
-    padding-bottom: 2%;
+    padding: 2% 5%;
 }
 
 .column-center {
-    padding-right: 5%;
-    padding-left: 5%;
-    padding-top: 2%
-    padding-bottom: 2%;
+    padding: 2% 5%;
     text-align: center;
 }
 
-.quelle-header {
+.sources-header {
     padding-top: 1px;
     padding-bottom: 1px;
     margin-top: 2px;
@@ -42,9 +36,6 @@
 
 /*  TODO different padding for different resolutions */
 .headline {
-    padding-top: 35px;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-bottom: 2%;
+    padding: 35px 5% 2%;
     text-align: center;
 }
