@@ -1,7 +1,10 @@
+const raphael = require('raphael');
+const jQuery = require("jquery");
+window.$ = window.jQuery = jQuery;
+require("bootstrap");
+
 const w = 1050;
 const h = 1160;
-
-const raphael = require('raphael');
 const rsr = raphael("map");
 
 rsr.setViewBox(0, 0, w, h);
