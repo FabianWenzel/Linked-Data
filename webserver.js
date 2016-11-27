@@ -3,6 +3,7 @@ const app = express();
 const port = 3000;
 
 app.use(express.static('public/page'));
+app.use('/css', express.static('node_modules/bootstrap/dist/css'));
 
 app.listen(port, (err) => {
     if (err) {
