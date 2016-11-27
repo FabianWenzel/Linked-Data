@@ -4,49 +4,47 @@
 }
 
 .column-left {
-	padding-left: 5%;
-	padding-top: 2%
-	padding-bottom: 2%;
+    padding-left: 5%;
+    padding-top: 2%
+    padding-bottom: 2%;
 }
 
 .column-right {
-	padding-right: 5%;
-	padding-left: 5%;
-	padding-top: 2%
-	padding-bottom: 2%;
+    padding-right: 5%;
+    padding-left: 5%;
+    padding-top: 2%
+    padding-bottom: 2%;
 }
 
 .column-center {
-	padding-right: 5%;
-	padding-left: 5%;
-	padding-top: 2%
-	padding-bottom: 2%;
-	text-align: center;
+    padding-right: 5%;
+    padding-left: 5%;
+    padding-top: 2%
+    padding-bottom: 2%;
+    text-align: center;
 }
 
 .quelle-header {
-	padding-top: 1px;
-	padding-bottom: 1px;
-	margin-top: 2px;
-	margin-bottom: 4px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-top: 2px;
+    margin-bottom: 4px;
 }
 
-
 .main-row {
-	padding-top: 7%;
+    padding-top: 7%;
 }
 
 .custom-nav {
-	padding-left: 5%;
-	padding-right: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
-
-/*  TODO different padding for different resolutions*/
+/*  TODO different padding for different resolutions */
 .headline {
-	padding-top: 35px;
-	padding-left: 5%;
-	padding-right: 5%;
-	padding-bottom: 2%;
-	text-align: center;
+    padding-top: 35px;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 2%;
+    text-align: center;
 }
