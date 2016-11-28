@@ -812,9 +812,9 @@ function getData(regionId, crimeType, maxHz) {
 }
 
 function showStuff(counter) {
-    $('#map').show();
-    $('#info').show();
-    $('#about-content').hide();
+    $('#home').show();
+    $('#sources').hide();
+    $('#about').hide();
 
     regions[counter].mouseover(function() {
         this.node.style.opacity = 0.7;
@@ -908,14 +908,22 @@ $('#diebstahl-insgesamt').click(function () {
     loadMap(crimeType);
 });
 
-// Load Sources page
+// Load sources page
 $('#quellen').click(function () {
-    const about = $('#about-content');
-    about.show();
+    $('#home').hide();
+    $('#about').hide();
+    $('#sources').show();
     document.getElementById('header-crime').innerHTML = "Quellen";
-    $('#map').hide();
-    $('#info').hide();
-    about.load('sources.html');
+    $('#sources-content').load('sources.html');
+});
+
+// Load about page
+$('#impressum').click(function () {
+    $('#home').hide();
+    $('#sources').hide();
+    $('#about').show();
+    document.getElementById('header-crime').innerHTML = "Impressum";
+    $('#about-content').load('about.html');
 });
 
 // Initial loadup of all crimes
