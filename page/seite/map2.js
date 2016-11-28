@@ -313,6 +313,8 @@ function showStuff(counter) {
 		console.log(thisIdCode);
 		console.log("SLT:" + regionDetails[thisIdCode].slt);
 		console.log("KAT:" + regionDetails[thisIdCode].kat);
+		console.log("HZT:" + regionDetails[thisIdCode].hzt);
+		console.log("EFT:" + regionDetails[thisIdCode].eft);
 
 		var kreisTyp;
 
@@ -322,17 +324,22 @@ function showStuff(counter) {
 			kreisTyp = "Stadtkreis";
 		}
 		
+
 		document.getElementById('region-name').innerHTML = regionDetails[thisIdCode].slt;
 		document.getElementById('region-type').innerHTML = kreisTyp;
 		document.getElementById('straftaten-prozent').innerHTML = regionDetails[thisIdCode].hzt;
 		
 		document.getElementById('straftaten').innerHTML = regionDetails[thisIdCode].eft;
 		// document.getElementById('einwohner').innerHTML = regionDetails[thisIdCode].einwohner;	
-	});
+
+		//D3 Code starts here: setting width height of the svg container and the radius for the pie
+		loadCharts(thisIdCode);
+
+		});
 
 	regions[counter].mouseout(function(e){
 		this.node.style.opacity = 1;
-	});	
+	});		
 }
 
 // Load stats for murder
@@ -399,8 +406,7 @@ $('#diebstahl-insgesamt').click(function() {
 	console.log("CRIME-TYPE: " + crimeType);
 	for (var i = 0; i < regions.length; i++) {
 		var regionFull = regions[i].data('id');
-    	var regionId = regionFull.substring(6);
-    	
+    	var regionId = regionFull.substring(6);    	
     	getData(regionId, crimeType);
     	showStuff(i);
 	}
@@ -427,3 +433,59 @@ for (var i = 0; i < regions.length; i++) {
     getData(regionId, crimeType);
     showStuff(i);
 }
+
+
+function loadingd3() {
+	console.log("Success loaded");
+}
+
+function loadCharts(id){
+	d3.select("#chart > svg").remove();
+		
+		var w = 400;
+		var h = 400;
+		var r = h/2;
+
+		//color for the pie
+		var color = d3.scale.category20c();
+
+		//Preset for the data we are using for the pie chart, later d3 will return label and value
+		// return. d.value and return data[i].label
+		var data = [{"label":regionDetails[id].slt, "value":regionDetails[id].eft}, 
+              		{"label":regionDetails[id].kat, "value":regionDetails[id].hzt}];
+
+              		console.log(regionDetails[id].slt);
+        //Creating the svg container: this container will be added (append) to the <span> element with id #straftaten-prozent
+        //we set the attributes width and hight of the container with .attr("height", h) and also tell d3 the radius
+		var vis = d3.select('#chart').append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
+		//tell d3 which values (not the labels) it should use
+		var pie = d3.layout.pie().value(function(d){return d.value;});
+
+		// declare an arc generator function
+		var arc = d3.svg.arc().outerRadius(r);
+
+		// select paths, use arc generator to draw
+		var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
+		arcs.append("svg:path")
+   		 .attr("fill", function(d, i){
+        return color(i);
+   		 })
+   		 .attr("d", function (d) {
+        // log the result of the arc generator to show how cool it is :)
+        console.log(arc(d));
+        return arc(d);
+        });
+
+		// add the text
+		arcs.append("svg:text").attr("transform", function(d){
+        d.innerRadius = 0;
+        d.outerRadius = r;
+        return "translate(" + arc.centroid(d) + ")";}).attr("text-anchor", "middle").text( function(d, i) {
+  		return data[i].label;}
+   		);
+}
+// D3 Code goes here
+
+
+
+
