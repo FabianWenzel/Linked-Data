@@ -10,15 +10,19 @@
     <link rel="icon" href="../../favicon.ico">
     <script src="https://d3js.org/d3.v3.min.js"></script>
 
+
     <title>Crime Map</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+
 </head>
 
-<body>
+<body onload="loadingd3()">
+
 <nav class="navbar navbar-default navbar-fixed-top custom-nav">
+
     <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
                 aria-expanded="false" aria-controls="navbar">
@@ -54,11 +58,13 @@
             <!-- <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li> -->
         </ul>
     </div><!--/.nav-collapse -->
+
 </nav>
 
 <div class="row headline">
     <h1 id="header-crime"></h1>
 </div>
+
 
 <!-- <div class="container"> -->
 <!-- Example row of columns -->
@@ -74,75 +80,8 @@
         <p><!-- Einwohner:                          <span id="einwohner"></span>--> Straftaten gesamt: <span
                 id="straftaten"></span></p>
         <p><span id="straftaten-typ"></span> pro 100.000 Einwohner: <span id="straftaten-prozent"></span></p>
-        <div id="chart">
-            <script>
+        <div id="chart"></div>
 
-                //Just a test to load the json file into d3
-                d3.json("data/example.json", function (data) {
-                    var result_values_subject = data.results.bindings[2].subject.value;
-                    var result_values_object = data.results.bindings[0].object.value;
-                    console.log(result_values_subject);
-                    console.log(result_values_object);
-
-                    var newdata = data;
-
-                    var w = 400;
-                    var h = 400;
-                    var r = h / 2;
-                    var color = d3.scale.category20c();
-
-                    var quelle = {
-                        item_quelle: []
-                    };
-
-                    for (var i in data.results.bindings) {
-                        quelle.item_quelle.push({
-                            "subject": data.results.bindings[i].subject.value,
-                            "object": data.results.bindings[i].object.value
-                        });
-                    }
-
-                    console.log(quelle);
-
-                    var data = [{"label": "Category A", "value": 20},
-                        {"label": "Category B", "value": 50},
-                        {"label": "Category C", "value": 30}];
-
-
-                    var vis = d3.select('#chart').append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
-                    var pie = d3.layout.pie().value(function (d) {
-                        return d.value;
-                    });
-
-                    // declare an arc generator function
-                    var arc = d3.svg.arc().outerRadius(r);
-
-                    // select paths, use arc generator to draw
-                    var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
-                    arcs.append("svg:path")
-                        .attr("fill", function (d, i) {
-                            return color(i);
-                        })
-                        .attr("d", function (d) {
-                            // log the result of the arc generator to show how cool it is :)
-                            console.log(arc(d));
-                            return arc(d);
-                        });
-
-                    // add the text
-                    arcs.append("svg:text").attr("transform", function (d) {
-                        d.innerRadius = 0;
-                        d.outerRadius = r;
-                        return "translate(" + arc.centroid(d) + ")";
-                    }).attr("text-anchor", "middle").text(function (d, i) {
-                            return data[i].label;
-                        }
-                    );
-                });
-
-
-            </script>
-        </div>
     </div>
 </div>
 
@@ -161,6 +100,6 @@
 
 
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="js/bundle.js"></script>
+<script src="bundle.js"></script>
 </body>
 </html>
