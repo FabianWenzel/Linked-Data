@@ -841,7 +841,7 @@ function showStuff(counter) {
         document.getElementById('straftaten').innerHTML = regionDetails[thisIdCode].eft;
         // document.getElementById('einwohner').innerHTML = regionDetails[thisIdCode].einwohner;
 
-        loadCharts(thisIdCode);
+        loadCharts(regionDetails[thisIdCode].tvmt,regionDetails[thisIdCode].tvwt, "#chart1");
     });
 
     regions[counter].mouseout(function() {
@@ -928,9 +928,10 @@ function loadingd3() {
     console.log("Success loaded");
 }
 
-function loadCharts(id){
+
+function loadCharts(data1, data2, divid){
     //D3 Code starts here: setting width height of the svg container and the radius for the pie
-    d3.select("#chart > svg").remove();
+    d3.select(divid+ " > svg").remove();
 
     var w = 400;
     var h = 400;
@@ -941,13 +942,12 @@ function loadCharts(id){
 
     //Preset for the data we are using for the pie chart, later d3 will return label and value
     // return. d.value and return data[i].label
-    var data = [{"label":("männlich "+regionDetails[id].tvmt), "value":regionDetails[id].tvmt},
-                {"label":("weiblich "+regionDetails[id].tvwt), "value":regionDetails[id].tvwt}];
+    var data = [{"label":("männlich "+data1), "value":data1},
+                {"label":("weiblich "+data2), "value":data2}];
 
-    console.log(regionDetails[id].slt);
     //Creating the svg container: this container will be added (append) to the <span> element with id #straftaten-prozent
     //we set the attributes width and hight of the container with .attr("height", h) and also tell d3 the radius
-    var vis = d3.select('#chart').append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
+    var vis = d3.select(divid).append("svg:svg").data([data]).attr("width", w).attr("height", h).append("svg:g").attr("transform", "translate(" + r + "," + r + ")");
     //tell d3 which values (not the labels) it should use
     var pie = d3.layout.pie().value(function(d){return d.value;});
 
