@@ -38,3 +38,6 @@ jspm_packages
 
 # Browserify
 bundle.js
+
+# WebStorm project files
+.idea
