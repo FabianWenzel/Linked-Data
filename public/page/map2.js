@@ -701,6 +701,9 @@ var sl;
 var ka;
 var gs;
 var ef;
+var tvm;
+var tvw;
+var tvi;
 
 // ArrayId von regions ermitteln
 var lookup = {};
@@ -743,7 +746,7 @@ function getColorByHz(hz) {
 }
 
 function getData(regionId, crimeType, maxHz) {
-    const queryString = "http://localhost:3030/bka/?query=PREFIX%20bka:%20%3Chttp://purl.org/net/hdm-bka%3E%20SELECT%20?hz%20?sl%20?ka%20?gs%20?ef%20WHERE%20{?x%20bka:HZ_nach_Zensus%20?hz%20.%20?x%20bka:Stadt_Landkreis%20?sl%20.%20?x%20bka:Kreisart%20?ka%20.%20?x%20bka:Straftat%20%22" + crimeType + "%22%20.%20?x%20bka:Gemeindeschluessel%20%22" + regionId + "%22%20.%20?x%20bka:Gemeindeschluessel%20?gs%20.%20?x%20bka:erfasste_Faelle%20?ef}&output=JSON";
+    const queryString = "http://localhost:3030/bka/?query=PREFIX%20bka:%20%3Chttp://purl.org/net/hdm-bka%3E%20SELECT%20?hz%20?sl%20?ka%20?gs%20?ef%20?tvi%20?tvm%20?tvw%20WHERE%20{?x%20bka:HZ_nach_Zensus%20?hz%20.%20?x%20bka:Stadt_Landkreis%20?sl%20.%20?x%20bka:Kreisart%20?ka%20.%20?x%20bka:Straftat%20%22" + crimeType + "%22%20.%20?x%20bka:Gemeindeschluessel%20%22" + regionId + "%22%20.%20?x%20bka:Gemeindeschluessel%20?gs%20.%20?x%20bka:erfasste_Faelle%20?ef%20.%20?x%20bka:Tatverdaechtige_insgesamt%20?tvi%20.%20?x%20bka:Tatverdaechtige_maennlich%20?tvm%20.%20?x%20bka:Tatverdaechtige_weiblich%20?tvw}&output=JSON";
 
     $.getJSON(queryString, function (data) {
         // console.log("success");
@@ -775,6 +778,21 @@ function getData(regionId, crimeType, maxHz) {
                         ef = efval;
                     }
                 });
+                $.each(n.tvm, function (tvmkey, tvmval) {
+                    if (tvmkey.localeCompare('value') == 0) {
+                        tvm = tvmval;
+                    }
+                });
+                $.each(n.tvw, function (tvwkey, tvwval) {
+                    if (tvwkey.localeCompare('value') == 0) {
+                        tvw = tvwval;
+                    }
+                });
+                $.each(n.tvi, function (tvikey, tvival) {
+                    if (tvikey.localeCompare('value') == 0) {
+                        tvi = tvival;
+                    }
+                });
 
                 const hzColor = getColorByHz(hz / maxHz * 100);
                 const regionId = lookup[gs];
@@ -784,7 +802,7 @@ function getData(regionId, crimeType, maxHz) {
                 // Regionen einfärben
                 regions[regionId].node.setAttribute('fill', hzColor);
                 // Ergebnisse in Array speichern
-                regionDetails[regionId] = ({hzt: hz, gst: gs, slt: sl, kat: ka, eft: ef, einwohner: einwohner});
+                regionDetails[regionId] = ({hzt: hz, gst: gs, slt: sl, kat: ka, eft: ef, einwohner: einwohner, tvwt:tvw, tvmt:tvm});
                 if (regionId2 !== undefined) {
                     regions[regionId2].node.setAttribute('fill', hzColor);
                 }
@@ -923,8 +941,8 @@ function loadCharts(id){
 
     //Preset for the data we are using for the pie chart, later d3 will return label and value
     // return. d.value and return data[i].label
-    var data = [{"label":regionDetails[id].slt, "value":regionDetails[id].eft},
-        {"label":regionDetails[id].kat, "value":regionDetails[id].hzt}];
+    var data = [{"label":("männlich "+regionDetails[id].tvmt), "value":regionDetails[id].tvmt},
+                {"label":("weiblich "+regionDetails[id].tvwt), "value":regionDetails[id].tvwt}];
 
     console.log(regionDetails[id].slt);
     //Creating the svg container: this container will be added (append) to the <span> element with id #straftaten-prozent
