@@ -704,6 +704,7 @@ var ef;
 var tvm;
 var tvw;
 var tvi;
+var ndtv;
 
 // ArrayId von regions ermitteln
 var lookup = {};
@@ -746,7 +747,7 @@ function getColorByHz(hz) {
 }
 
 function getData(regionId, crimeType, maxHz) {
-    const queryString = "http://localhost:3030/bka/?query=PREFIX%20bka:%20%3Chttp://purl.org/net/hdm-bka%3E%20SELECT%20?hz%20?sl%20?ka%20?gs%20?ef%20?tvi%20?tvm%20?tvw%20WHERE%20{?x%20bka:HZ_nach_Zensus%20?hz%20.%20?x%20bka:Stadt_Landkreis%20?sl%20.%20?x%20bka:Kreisart%20?ka%20.%20?x%20bka:Straftat%20%22" + crimeType + "%22%20.%20?x%20bka:Gemeindeschluessel%20%22" + regionId + "%22%20.%20?x%20bka:Gemeindeschluessel%20?gs%20.%20?x%20bka:erfasste_Faelle%20?ef%20.%20?x%20bka:Tatverdaechtige_insgesamt%20?tvi%20.%20?x%20bka:Tatverdaechtige_maennlich%20?tvm%20.%20?x%20bka:Tatverdaechtige_weiblich%20?tvw}&output=JSON";
+    const queryString = "http://localhost:3030/bka/?query=PREFIX%20bka:%20%3Chttp://purl.org/net/hdm-bka%3E%20SELECT%20?hz%20?sl%20?ka%20?gs%20?ef%20?tvi%20?tvm%20?tvw%20?ndtv%20WHERE%20{?x%20bka:HZ_nach_Zensus%20?hz%20.%20?x%20bka:Stadt_Landkreis%20?sl%20.%20?x%20bka:Kreisart%20?ka%20.%20?x%20bka:Straftat%20%22" + crimeType + "%22%20.%20?x%20bka:Gemeindeschluessel%20%22" + regionId + "%22%20.%20?x%20bka:Gemeindeschluessel%20?gs%20.%20?x%20bka:erfasste_Faelle%20?ef%20.%20?x%20bka:Tatverdaechtige_insgesamt%20?tvi%20.%20?x%20bka:Tatverdaechtige_maennlich%20?tvm%20.%20?x%20bka:Tatverdaechtige_weiblich%20?tvw%20.%20?x%20bka:Nichtdeutsche_Tatverdaechtige_Anzahl%20?ndtv}&output=JSON";
 
     $.getJSON(queryString, function (data) {
         // console.log("success");
@@ -793,6 +794,11 @@ function getData(regionId, crimeType, maxHz) {
                         tvi = tvival;
                     }
                 });
+                $.each(n.ndtv, function (ndtvkey, ndtvval) {
+                    if (ndtvkey.localeCompare('value') == 0) {
+                        ndtv = ndtvval;
+                    }
+                });
 
                 const hzColor = getColorByHz(hz / maxHz * 100);
                 const regionId = lookup[gs];
@@ -802,7 +808,7 @@ function getData(regionId, crimeType, maxHz) {
                 // Regionen einfärben
                 regions[regionId].node.setAttribute('fill', hzColor);
                 // Ergebnisse in Array speichern
-                regionDetails[regionId] = ({hzt: hz, gst: gs, slt: sl, kat: ka, eft: ef, einwohner: einwohner, tvwt:tvw, tvmt:tvm});
+                regionDetails[regionId] = ({hzt: hz, gst: gs, slt: sl, kat: ka, eft: ef, einwohner: einwohner, tvwt:tvw, tvmt:tvm, tvit:tvi, ndtvt:ndtv});
                 if (regionId2 !== undefined) {
                     regions[regionId2].node.setAttribute('fill', hzColor);
                 }
@@ -841,7 +847,8 @@ function showStuff(counter) {
         document.getElementById('straftaten').innerHTML = regionDetails[thisIdCode].eft;
         // document.getElementById('einwohner').innerHTML = regionDetails[thisIdCode].einwohner;
 
-        loadCharts(regionDetails[thisIdCode].tvmt,regionDetails[thisIdCode].tvwt, "#chart1");
+        loadCharts(regionDetails[thisIdCode].tvmt,regionDetails[thisIdCode].tvwt, "#chart1", "Männlich", "Weiblich");
+        loadCharts(regionDetails[thisIdCode].tvit - regionDetails[thisIdCode].ndtvt,regionDetails[thisIdCode].ndtvt, "#chart2", "Deutsch", "Nichtdeutsch");
     });
 
     regions[counter].mouseout(function() {
@@ -937,12 +944,12 @@ function loadingd3() {
 }
 
 
-function loadCharts(data1, data2, divid){
+function loadCharts(data1, data2, divid, label1, label2){
     //D3 Code starts here: setting width height of the svg container and the radius for the pie
     d3.select(divid+ " > svg").remove();
 
-    var w = 400;
-    var h = 400;
+    var w = 250;
+    var h = 250;
     var r = h/2;
 
     //color for the pie
@@ -950,8 +957,8 @@ function loadCharts(data1, data2, divid){
 
     //Preset for the data we are using for the pie chart, later d3 will return label and value
     // return. d.value and return data[i].label
-    var data = [{"label":("männlich "+data1), "value":data1},
-                {"label":("weiblich "+data2), "value":data2}];
+    var data = [{"label":(label1 + ": " + data1), "value":data1},
+                {"label":(label2 + ": " + data2), "value":data2}];
 
     //Creating the svg container: this container will be added (append) to the <span> element with id #straftaten-prozent
     //we set the attributes width and hight of the container with .attr("height", h) and also tell d3 the radius
