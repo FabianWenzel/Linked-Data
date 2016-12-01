@@ -14,7 +14,7 @@
 }
 
 .column-center {
-    padding: 2% 5%;
+    padding: 0% 5%;
     text-align: center;
 }
 
@@ -32,6 +32,11 @@
 .custom-nav {
     padding-left: 5%;
     padding-right: 5%;
+}
+
+.charts {
+    padding-top: 2%;
+    text-align: center;
 }
 
 /*  TODO different padding for different resolutions */
