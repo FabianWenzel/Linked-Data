@@ -1,4 +1,4 @@
-PREFIX bka: <http://127.0.0.1/data/>
+PREFIX bka: <http://purl.org/net/hdm-bka>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 CONSTRUCT {
@@ -24,7 +24,7 @@ CONSTRUCT {
 }
 FROM <file:FaelleGrundtabelleKreise.csv#delimiter=%3B;encoding=latin1>
 WHERE {
-	BIND("http://127.0.0.1/data/" AS ?baseURI)
+	BIND("http://purl.org/net/hdm-bka/" AS ?baseURI)
 	BIND(URI(CONCAT(?baseURI, "crime-stat/", ?Schluesse, "/", ?Gemeindeschluessel)) AS ?crime_stat)
 	BIND (xsd:integer(?erfasste_Faelle) AS ?erfasste_Faelle_int)
 	BIND (xsd:integer(?HZ_nach_Zensus) AS ?HZ_nach_Zensus_int)
