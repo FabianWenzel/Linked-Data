@@ -1,5 +1,7 @@
-# Linked-Data
-Project for the subject Linked Data
+# Linked-Data: Crime Map BW
+Crime Map BW is a student's project for the subject Linked Data.
+Crime Map BW utilizes linked data to access and visualize crime statistics for the German state of Baden-Württemberg.
+If the website is not displayed correctly, try switching your browser to Google Chrome.
 
 # Installation
 
@@ -17,4 +19,6 @@ Project for the subject Linked Data
 3. Visit website
   - go to localhost:3000/home.html
   
-If the website is not displayed correctly, try using Google Chrome Browser.
+  
+  
+
