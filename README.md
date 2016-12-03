@@ -16,3 +16,5 @@ Project for the subject Linked Data
 
 3. Visit website
   - go to localhost:3000/home.html
+  
+If the website is not displayed correctly, try using Google Chrome Browser.
